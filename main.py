@@ -12,8 +12,8 @@ while "_" in progress:
     newValue = ''
     inp = input(progress)
     for i in range(len(progress)):
-        if random[i] == inp:
-            newValue += inp
+        if random[i] == inp.upper():
+            newValue += inp.upper()
         elif progress[i] != '_':
             newValue += progress[i]
         else:
