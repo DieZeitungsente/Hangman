@@ -24,16 +24,22 @@ def startgame():
             progress = inp.upper()
         else:
             for i in range(len(progress)):
-                if rdm[i] == inp[0].upper():
-                    newValue += inp[0].upper()
-                elif progress[i] != '_':
-                    newValue += progress[i]
+                if not len(inp) < 1:
+                    if rdm[i] == inp[0].upper():
+                        newValue += inp[0].upper()
+                    elif progress[i] != '_':
+                        newValue += progress[i]
+                    else:
+                        newValue += '_'
                 else:
-                 newValue += '_'
+                    newValue += progress[i]
         if progress == newValue:
-            if inp[0].upper() not in invalid:
-                wrong += 1
-                invalid.append(inp[0].upper())
+            try:
+                if inp[0].upper() not in invalid:
+                    wrong += 1
+                    invalid.append(inp[0].upper())
+            except:
+                wrong = wrong
         if wrong == 10:
             print(f"You lost! The word was {rdm.lower()}")
             again = input('Play again? [y/n]: ')
