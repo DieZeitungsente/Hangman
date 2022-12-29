@@ -8,21 +8,32 @@ def startgame():
     os.system("cls")
     wrong = 0
     progress = ""
+    invalid = []
     for letter in rdm:
         progress += '_'
     while "_" in progress:
         newValue = ''
+        prt = ''
+        for item in invalid:
+            prt += item
+        print(prt)
+        print(' - ')
         print(progress)
         inp = input()
-        for i in range(len(progress)):
-            if rdm[i] == inp.upper():
-                newValue += inp.upper()
-            elif progress[i] != '_':
-                newValue += progress[i]
-            else:
-                newValue += '_'
+        if inp.upper() == rdm.upper():
+            progress = inp.upper()
+        else:
+            for i in range(len(progress)):
+                if rdm[i] == inp[0].upper():
+                    newValue += inp[0].upper()
+                elif progress[i] != '_':
+                    newValue += progress[i]
+                else:
+                 newValue += '_'
         if progress == newValue:
-            wrong += 1
+            if inp[0].upper() not in invalid:
+                wrong += 1
+                invalid.append(inp[0].upper())
         if wrong == 10:
             print(f"You lost! The word was {rdm.lower()}")
             again = input('Play again? [y/n]: ')
@@ -32,6 +43,8 @@ def startgame():
                 sys.exit()
         progress = newValue
         os.system("cls")
+    print(prt)
+    print(' - ')
     print(rdm)
     print("\nYOU WIN!")
     again = input('Play again? [y/n]: ')
